@@ -127,11 +127,11 @@ class MarkdownExportSettingTab extends PluginSettingTab {
 		containerEl.createEl("h2", { text: "Markdown Export" });
 
 		new Setting(containerEl)
-			.setName("Custom default output path")
-			.setDesc("default directory for one-click export")
+			.setName("默认导出路径")
+			.setDesc("一键导出的默认目录")
 			.addText((text) =>
 				text
-					.setPlaceholder("Enter default output path")
+					.setPlaceholder("输入导出路径")
 					.setValue(this.plugin.settings.output)
 					.onChange(async (value) => {
 						this.plugin.settings.output = value;
@@ -140,11 +140,11 @@ class MarkdownExportSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Custom attachment path(optional)")
-			.setDesc("attachment path, relative to the output path")
+			.setName("自定义附件路径（可选）")
+			.setDesc("附件路径，相对于输出路径")
 			.addText((text) =>
 				text
-					.setPlaceholder("Enter attachment path")
+					.setPlaceholder("输入附件路径")
 					.setValue(this.plugin.settings.attachment)
 					.onChange(async (value) => {
 						this.plugin.settings.attachment = value;
@@ -153,9 +153,9 @@ class MarkdownExportSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Use GitHub Flavored Markdown Format")
+			.setName("使用GitHub风格Markdown")
 			.setDesc(
-				"The format of markdown is more inclined to choose Github Flavored Markdown",
+				"markdown的格式更倾向于选择Github风味Markdown",
 			)
 			.addToggle((toggle) =>
 				toggle
@@ -167,9 +167,9 @@ class MarkdownExportSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Use Html tag <img /> to display image")
+			.setName("使用Html标签<img/>显示图像")
 			.setDesc(
-				"false default, <img /> tag will use the size specified in obsidian.",
+				"默认关闭，<img/>标签将使用黑曜石中指定的大小。",
 			)
 			.addToggle((toggle) =>
 				toggle
@@ -181,9 +181,9 @@ class MarkdownExportSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Encode file name")
+			.setName("文件名编码")
 			.setDesc(
-				"true default, if you want to keep the original file name, set this to false",
+				"如果要保留原始文件名，请将其设置为false",
 			)
 			.addToggle((toggle) =>
 				toggle
@@ -195,9 +195,9 @@ class MarkdownExportSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Remove brackets for outgoing links")
+			.setName("去除外链")
 			.setDesc(
-				"false default, if you want to remove the brackets in links, set this to true",
+				"如果要删除外链中的括号，请将其打开",
 			)
 			.addToggle((toggle) =>
 				toggle
@@ -209,9 +209,9 @@ class MarkdownExportSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Include filename in output path")
+			.setName("输出文件名")
 			.setDesc(
-				"false default, if you want to include the filename (without extension) in the output path set this to true",
+				"如果要在输出路径中包含文件名（不带扩展名），请将其设置为true",
 			)
 			.addToggle((toggle) =>
 				toggle
@@ -222,14 +222,28 @@ class MarkdownExportSettingTab extends PluginSettingTab {
 					}),
 			);
 		new Setting(containerEl)
-			.setName("Custom filename")
-			.setDesc("update if you want a custom filename, leave off extension")
+			.setName("自定义导出文件名")
+			.setDesc("不需要输入扩展名")
 			.addText((text) =>
 				text
-					.setPlaceholder("Enter custom filename")
+					.setPlaceholder("输入导出文件名")
 					.setValue(this.plugin.settings.customFileName)
 					.onChange(async (value) => {
 						this.plugin.settings.customFileName = value;
+						await this.plugin.saveSettings();
+					}),
+			);
+		containerEl.createEl("h3", { text: "obsidian to anki相关配置" });
+		new Setting(containerEl)
+			.setName("删除anki卡片id")
+			.setDesc(
+				"删除《》id",
+			)
+			.addToggle((toggle) =>
+				toggle
+					.setValue(this.plugin.settings.removeAnkiCardId)
+					.onChange(async (value: boolean) => {
+						this.plugin.settings.removeAnkiCardId = value;
 						await this.plugin.saveSettings();
 					}),
 			);
