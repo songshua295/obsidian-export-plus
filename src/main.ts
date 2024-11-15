@@ -96,7 +96,7 @@ export default class MarkdownExportPlugin extends Plugin {
 		);
 	}
 
-	onunload() {}
+	onunload() { }
 
 	async loadSettings() {
 		this.settings = Object.assign(
@@ -247,19 +247,7 @@ class MarkdownExportSettingTab extends PluginSettingTab {
 						await this.plugin.saveSettings();
 					}),
 			);
-		new Setting(containerEl)
-			.setName("去除挖空 1：{内容}⇒内容")
-			.setDesc(
-				"将卡片内容{内容}替换为内容",
-			)
-			.addToggle((toggle) =>
-				toggle
-					.setValue(this.plugin.settings.cleanBraces)
-					.onChange(async (value: boolean) => {
-						this.plugin.settings.cleanBraces = value;
-						await this.plugin.saveSettings();
-					}),
-			);
+
 		new Setting(containerEl)
 			.setName("去除挖空 2：{c1::内容}⇒内容")
 			.setDesc(
@@ -270,6 +258,19 @@ class MarkdownExportSettingTab extends PluginSettingTab {
 					.setValue(this.plugin.settings.cleanHollowFormat)
 					.onChange(async (value: boolean) => {
 						this.plugin.settings.cleanHollowFormat = value;
+						await this.plugin.saveSettings();
+					}),
+			);
+		new Setting(containerEl)
+			.setName("去除挖空 1：{内容}⇒内容")
+			.setDesc(
+				"将卡片内容{内容}替换为内容",
+			)
+			.addToggle((toggle) =>
+				toggle
+					.setValue(this.plugin.settings.cleanBraces)
+					.onChange(async (value: boolean) => {
+						this.plugin.settings.cleanBraces = value;
 						await this.plugin.saveSettings();
 					}),
 			);

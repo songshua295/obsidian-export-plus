@@ -413,7 +413,7 @@ export async function tryCopyMarkdownByRead(
 
 			// 去除单引号
 			if (plugin.settings.cleanBraces) {
-				content = content.replace(/{c(\d{1,2})::(.*?)}/g, '$2');
+				content = content.replace(/{(.*?)}/g, '{$1}');
 			}
 			const cfile = plugin.app.workspace.getActiveFile();
 			if (cfile != undefined) {
