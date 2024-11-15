@@ -19,6 +19,8 @@ export interface MarkdownExportPluginSettings {
 	includeFileName: boolean;
 	removeAnkiCardId: boolean;
 	removeOuterBraces: boolean;
+	cleanHollowFormat: boolean;
+	cleanBraces: boolean;
 	customFileName: string;
 }
 
@@ -32,5 +34,7 @@ export const DEFAULT_SETTINGS: MarkdownExportPluginSettings = {
 	includeFileName: false,
 	removeAnkiCardId: false,
 	removeOuterBraces: false,
+	cleanHollowFormat: false,
+	cleanBraces: false,
 	customFileName: "",
 };

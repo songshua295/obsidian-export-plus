@@ -237,13 +237,39 @@ class MarkdownExportSettingTab extends PluginSettingTab {
 		new Setting(containerEl)
 			.setName("删除anki卡片id")
 			.setDesc(
-				"删除《》id",
+				"删除 <!--ID: 13个数字-->",
 			)
 			.addToggle((toggle) =>
 				toggle
 					.setValue(this.plugin.settings.removeAnkiCardId)
 					.onChange(async (value: boolean) => {
 						this.plugin.settings.removeAnkiCardId = value;
+						await this.plugin.saveSettings();
+					}),
+			);
+		new Setting(containerEl)
+			.setName("去除挖空 1：{内容}⇒内容")
+			.setDesc(
+				"将卡片内容{内容}替换为内容",
+			)
+			.addToggle((toggle) =>
+				toggle
+					.setValue(this.plugin.settings.cleanBraces)
+					.onChange(async (value: boolean) => {
+						this.plugin.settings.cleanBraces = value;
+						await this.plugin.saveSettings();
+					}),
+			);
+		new Setting(containerEl)
+			.setName("去除挖空 2：{c1::内容}⇒内容")
+			.setDesc(
+				"将卡片内容{c数字::内容}替换为内容",
+			)
+			.addToggle((toggle) =>
+				toggle
+					.setValue(this.plugin.settings.cleanHollowFormat)
+					.onChange(async (value: boolean) => {
+						this.plugin.settings.cleanHollowFormat = value;
 						await this.plugin.saveSettings();
 					}),
 			);
