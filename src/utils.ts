@@ -408,12 +408,12 @@ export async function tryCopyMarkdownByRead(
 
 			// 去除挖空：{c数字::内容}替换为 内容
 			if (plugin.settings.cleanHollowFormat) {
-				content = content.replace(/{c(\d{1,2})::(.*?)}/g, '$2');
+				content = content.replace(/{{c(\d{1,2})::(.*?)}}/g, '$2');
 			}
 
 			// 去除单引号
 			if (plugin.settings.cleanBraces) {
-				content = content.replace(/{(.*?)}/g, '{$1}');
+				content = content.replace(/{(.*?)}/g, '$1');
 			}
 			const cfile = plugin.app.workspace.getActiveFile();
 			if (cfile != undefined) {

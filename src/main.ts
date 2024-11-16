@@ -249,7 +249,7 @@ class MarkdownExportSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("去除挖空 2：{c1::内容}⇒内容")
+			.setName("去除挖空：{c1::内容}⇒内容")
 			.setDesc(
 				"将卡片内容{c数字::内容}替换为内容",
 			)
@@ -262,7 +262,7 @@ class MarkdownExportSettingTab extends PluginSettingTab {
 					}),
 			);
 		new Setting(containerEl)
-			.setName("去除挖空 1：{内容}⇒内容")
+			.setName("去除花括号：{内容}⇒内容")
 			.setDesc(
 				"将卡片内容{内容}替换为内容",
 			)
